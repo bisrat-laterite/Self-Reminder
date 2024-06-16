@@ -130,7 +130,7 @@ if __name__ == "__main__":
                     print(reply_text)
                     getting_responses(gs, pre_message, reply_text)
                     send_message_bis(585511605, reply_text)
-                    time.sleep(2.5)
+                    time.sleep(3)
 
 
 
