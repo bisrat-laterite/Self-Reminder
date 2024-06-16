@@ -70,6 +70,7 @@ def getting_responses(gs, main_text, text):
     print(row)
     for r in row:
         val = gs.cell(r, 11).value
+        time.sleep(2)
         val2=gs.cell(r, 14).value
         print(val)
         print(val2)
