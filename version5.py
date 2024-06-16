@@ -124,13 +124,14 @@ if __name__ == "__main__":
                     # print(message.keys())
                     if 'text' in message.keys():
                         reply_text=message['text']
+                        print(reply_text)
+                        getting_responses(gs, pre_message, reply_text)
+                        send_message_bis(585511605, reply_text)
+                        time.sleep(4)
                     else:
                         #reply_text=message['voice']
                         continue
-                    print(reply_text)
-                    getting_responses(gs, pre_message, reply_text)
-                    send_message_bis(585511605, reply_text)
-                    time.sleep(4)
+
 
 
 
