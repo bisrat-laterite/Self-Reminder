@@ -56,6 +56,9 @@ def str_to_dict(string):
 def getting_responses(gs, main_text, text):
     find_key=main_text['HHID']
     find_variable=main_text['Variable']
+    if find_key=='' and find_variable=='':
+        return None
+        
     # finding hhid
     hhid=[]
     print(hhid)
