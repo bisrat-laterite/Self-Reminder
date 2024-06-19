@@ -117,7 +117,7 @@ if __name__ == "__main__":
             message=mes['message']
             # print(message['text'])
             # print('not edited')
-        if 'reply_to_message' in message:
+        if 'reply_to_message' in message and message['reply_to_message']['from']['first_name']== 'Data Quality Bot':
             # print(message)
             pre_message_inf=message['reply_to_message']
             if 'text' in pre_message_inf:
