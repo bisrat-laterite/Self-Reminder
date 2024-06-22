@@ -56,6 +56,7 @@ def str_to_dict(string):
 def getting_responses(gs, main_text, text):
     find_key=main_text['HHID']
     find_variable=main_text['Variable']
+    find_fc_var=main_text['FC Name']
     if find_key=='' or find_variable=='':
         return None
         
@@ -71,15 +72,19 @@ def getting_responses(gs, main_text, text):
     [variable.append(l.row) for l in gs.findall(find_variable)]
     row=list(set(hhid).intersection(variable))
     print(row)
+    if find_fc_var!='':
+        edit=20
+    else:
+        edit=11
     for r in row:
-        val = gs.cell(r, 11).value
+        val = gs.cell(r, edit).value
         time.sleep(2)
         val2=gs.cell(r, 14).value
         print(val)
         print(val2)
         if val== None and val2!="Generic":
             time.sleep(2)
-            gs.update_cell(r, 11, text)
+            gs.update_cell(r, edit, text)
             time.sleep(2)
 
 # while True:
