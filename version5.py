@@ -76,7 +76,7 @@ def getting_responses(gs, main_text, text):
     row=list(set(hhid).intersection(variable))
     print(row)
     if find_fc_var!='':
-        edit=20
+        edit=19
     else:
         edit=11
     for r in row:
