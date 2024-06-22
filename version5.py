@@ -47,7 +47,7 @@ def str_to_dict(string):
     # split the string into key-value pairs
     pairs = string.split('\n')
     # print(pairs)
-    pre= {key[0].rstrip().lstrip():key[1].rstrip().lstrip() for key in (pair.split(':') for pair in pairs) if key[0].rstrip().lstrip() in ['HHID', 'Variable']}
+    pre= {key[0].rstrip().lstrip():key[1].rstrip().lstrip() for key in (pair.split(':') for pair in pairs) if key[0].rstrip().lstrip() in ['HHID', 'Variable', 'FC Name']}
     # print(pre)
     return pre
   
