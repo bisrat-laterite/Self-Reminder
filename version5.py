@@ -56,8 +56,8 @@ def str_to_dict(string):
 def getting_responses(gs, main_text, text):
     find_key=main_text['HHID']
     find_variable=main_text['Variable']
-    if 'FCName' in main_text.keys():
-        find_fc_var=main_text['FCName']
+    if 'FC Name' in main_text.keys():
+        find_fc_var=main_text['FC Name']
     else:
         find_fc_var=''
     if find_key=='' or find_variable=='':
