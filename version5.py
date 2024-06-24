@@ -53,7 +53,7 @@ def str_to_dict(string):
   
 
 # gettting the response from field and edit the associated gsheets file
-def getting_responses(gs, main_text, text):
+def getting_responses(main_text, text):
     find_key=main_text['HHID']
     find_variable=main_text['Variable']
     if 'FC Name' in main_text.keys():
