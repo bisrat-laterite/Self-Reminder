@@ -47,7 +47,7 @@ def str_to_dict(string):
     # split the string into key-value pairs
     pairs = string.split('\n')
     # print(pairs)
-    pre= {key[0].rstrip().lstrip():key[1].rstrip().lstrip() for key in (pair.split(':') for pair in pairs) if key[0].rstrip().lstrip() in ['HHID', 'Variable', 'FCName']}
+    pre= {key[0].rstrip().lstrip():key[1].rstrip().lstrip() for key in (pair.split(':') for pair in pairs) if key[0].rstrip().lstrip() in ['HHID', 'Variable', 'FC Name', 'Project ID']}
     # print(pre)
     return pre
   
@@ -62,6 +62,20 @@ def getting_responses(gs, main_text, text):
         find_fc_var=''
     if find_key=='' or find_variable=='':
         return None
+    
+    ### google developer account associated credeantial
+    gc=gspread.service_account(filename='credentials.json')
+    if 'Project ID' in main_text.keys():
+        key_='1jMi73_wf6nTD3rSJQ2ir0epMft6CHnmQRcq1xQhnA4k'
+    else:
+        key_='1VfJd_0fW9QeCXqgxLtvaC3RcJygTwBxxfJfBcF1iA94'
+    ### Reading in the specific googles sheets file
+    sh=gc.open_by_key(key_)
+
+    # print(sh.worksheet('Data_Quality'))
+
+
+    gs=sh.worksheet('Data Quality')
         
     # finding hhid
     hhid=[]
@@ -75,7 +89,7 @@ def getting_responses(gs, main_text, text):
     [variable.append(l.row) for l in gs.findall(find_variable)]
     row=list(set(hhid).intersection(variable))
     print(row)
-    if find_fc_var!='':
+    if find_fc_var!='' and key_=='1VfJd_0fW9QeCXqgxLtvaC3RcJygTwBxxfJfBcF1iA94':
         edit=19
     else:
         edit=11
@@ -95,18 +109,6 @@ def getting_responses(gs, main_text, text):
 
 
 if __name__ == "__main__":
-
-    ### google developer account associated credeantial
-    gc=gspread.service_account(filename='credentials.json')
-    key_='1VfJd_0fW9QeCXqgxLtvaC3RcJygTwBxxfJfBcF1iA94'
-    ### Reading in the specific googles sheets file
-    sh=gc.open_by_key(key_)
-
-    # print(sh.worksheet('Data_Quality'))
-
-
-    gs=sh.worksheet('Data Quality')
-
 
     messages=read_msg()
     x=pd.json_normalize(messages,)
@@ -139,7 +141,7 @@ if __name__ == "__main__":
                     if 'text' in message.keys():
                         reply_text=message['text']
                         print(reply_text)
-                        getting_responses(gs, pre_message, reply_text)
+                        getting_responses(pre_message, reply_text)
                         send_message_bis(585511605, reply_text)
                         time.sleep(2)
                     else:
