@@ -64,6 +64,7 @@ def getting_responses(main_text, text):
         return None
     
     ### google developer account associated credeantial
+    time.sleep(2)
     gc=gspread.service_account(filename='credentials.json')
     if 'Project ID' in main_text.keys():
         key_='1jMi73_wf6nTD3rSJQ2ir0epMft6CHnmQRcq1xQhnA4k'
