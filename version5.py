@@ -98,13 +98,13 @@ def getting_responses(main_text, text):
         val = gs.cell(r, edit).value
         time.sleep(2)
         val2=gs.cell(r, 14).value
-        time.sleep(2)
+        #time.sleep(2)
         print(val)
         print(val2)
         if val== None and val2!="Generic":
-            time.sleep(2)
+            time.sleep(1)
             gs.update_cell(r, edit, text)
-            time.sleep(2)
+            time.sleep(1)
 
 # while True:
     # reading messages
