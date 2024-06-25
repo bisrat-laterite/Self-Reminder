@@ -35,7 +35,12 @@ def send_message(chat_id,text):
 ### function for reading in the responses to the data quality questions sent
 def read_msg():
   base_url="https://api.telegram.org/bot6176422429:AAHpWNC6B_rmnRVpoF1ueIhtiD3JOs2twDI/"
-  resp=requests.get(base_url+"getUpdates")
+  parameters={
+        'offset':394412184
+
+  }
+
+  resp=requests.get(base_url+"getUpdates",data=parameters)
   data=resp.json()
 
   return data['result']
