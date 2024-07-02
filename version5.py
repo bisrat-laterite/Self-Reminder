@@ -36,7 +36,7 @@ def send_message(chat_id,text):
 def read_msg():
   base_url="https://api.telegram.org/bot6176422429:AAHpWNC6B_rmnRVpoF1ueIhtiD3JOs2twDI/"
   parameters={
-        'offset':394412620
+        'offset':394413012
 
 
   }
@@ -107,7 +107,7 @@ def getting_responses(main_text, text):
         #time.sleep(2)
         print(val)
         print(val2)
-        if val2!="Generic":
+        if val2!="Generic" and val==None:
             time.sleep(1)
             gs.update_cell(r, edit, text)
             time.sleep(1)
