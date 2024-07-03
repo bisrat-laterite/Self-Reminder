@@ -36,7 +36,7 @@ def send_message(chat_id,text):
 def read_msg():
   base_url="https://api.telegram.org/bot6176422429:AAHpWNC6B_rmnRVpoF1ueIhtiD3JOs2twDI/"
   parameters={
-        'offset':394413507 
+        'offset':394413604 
 
 
   }
