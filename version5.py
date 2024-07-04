@@ -74,15 +74,20 @@ def getting_responses(main_text, text):
     gc=gspread.service_account(filename='credentials.json')
     if 'Project ID' in main_text.keys():
         key_='1jMi73_wf6nTD3rSJQ2ir0epMft6CHnmQRcq1xQhnA4k'
+    elif 'Task' in main_text.keys():
+        key_='1uOspkth_a7jxrNODZNtMBDW7H9NgEyvF1Plp6qABvfE'
     else:
         key_='1VfJd_0fW9QeCXqgxLtvaC3RcJygTwBxxfJfBcF1iA94'
     ### Reading in the specific googles sheets file
     sh=gc.open_by_key(key_)
 
     # print(sh.worksheet('Data_Quality'))
+    if key_=='1uOspkth_a7jxrNODZNtMBDW7H9NgEyvF1Plp6qABvfE':
+        sheet_name='Data Quality - Translations'
+    else:
+        sheet_name='Data Quality'
 
-
-    gs=sh.worksheet('Data Quality')
+    gs=sh.worksheet(sheet_name)
         
     # finding hhid
     hhid=[]
@@ -98,6 +103,10 @@ def getting_responses(main_text, text):
     print(row)
     if find_fc_var!='' and key_=='1VfJd_0fW9QeCXqgxLtvaC3RcJygTwBxxfJfBcF1iA94':
         edit=19
+    elif find_fc_var!='' and key_=='1uOspkth_a7jxrNODZNtMBDW7H9NgEyvF1Plp6qABvfE':
+        edit=12
+    elif find_fc_var=='' and key_=='1uOspkth_a7jxrNODZNtMBDW7H9NgEyvF1Plp6qABvfE':
+        edit=13
     else:
         edit=11
     for r in row:
