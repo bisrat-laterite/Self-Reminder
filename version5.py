@@ -220,7 +220,7 @@ if __name__ == "__main__":
             #time.sleep(0.4)
             # send_message(585511605,row['DC ID'])
     update_id_update=str(x.update_id.max())
-    if len(x)==100:
+    if len(x)!=0:
         ms.update_cell(1, 2, update_id_update)
 
 
