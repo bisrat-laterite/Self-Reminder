@@ -33,10 +33,10 @@ def send_message(chat_id,text):
   return success.status_code
 
 ### function for reading in the responses to the data quality questions sent
-def read_msg():
+def read_msg(update_id):
   base_url="https://api.telegram.org/bot6176422429:AAHpWNC6B_rmnRVpoF1ueIhtiD3JOs2twDI/"
   parameters={
-        'offset':394413743 
+        'offset':update_id 
 
 
   }
@@ -126,8 +126,16 @@ def getting_responses(main_text, text):
 
 
 if __name__ == "__main__":
+    ### Reading the update_id
+    main=gspread.service_account(filename='credentials.json')
+    main_key='1kq0JxL3PxB4yxZfBv_2_WOEHvy6kptP7jqB31v0XZoU'
+    sheet=main.open_by_key(main_key)
+    name_sheet='Master'
+    ms=sheet.worksheet(name_sheet)
 
-    messages=read_msg()
+    update_id = ms.cell(1, 2).value
+
+    messages=read_msg(update_id)
     x=pd.json_normalize(messages,)
     # y=pd.DataFrame(messages['message'])
     name=str(datetime.datetime.today()).replace(' ', '').replace(':', '').replace('.','')
@@ -211,6 +219,9 @@ if __name__ == "__main__":
                 send_message(585511605,row['DC ID'])
             #time.sleep(0.4)
             # send_message(585511605,row['DC ID'])
+    update_id_update=x.update_id.max()
+    if len(x)==100:
+        ms.update_cell(1, 2, update_id_update)
 
 
 
