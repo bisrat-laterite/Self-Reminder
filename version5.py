@@ -224,7 +224,7 @@ if __name__ == "__main__":
         ms.update_cell(1, 2, update_id_update)
 
     ### Translation finalize
-    gc=gspread.service_account(filename='credentials.json')
+    gc=gspread.service_account(filename='credentialss.json')
     key_='1uOspkth_a7jxrNODZNtMBDW7H9NgEyvF1Plp6qABvfE'
     ### Reading in the specific googles sheets file
     sh=gc.open_by_key(key_)
@@ -260,7 +260,7 @@ if __name__ == "__main__":
     dataframe['row_num']=dataframe.index+2
 
     #filtering the ones that need response
-    dataframe2=dataframe[filter1 & filter2 & filter4 & filter5 & filter6 & filter7 & filter9 & filter11]
+    dataframe2=dataframe[filter2 & filter4 & filter5 & filter6 & filter7 ]
 
     # grouping by and sending the messages
     for chat_id, data in dataframe2.groupby('enum_chat'):
@@ -290,7 +290,7 @@ if __name__ == "__main__":
             time.sleep(1)
             
 
-    dataframe3=dataframe[filter1 & filter2 & filter4 & filter5 & filter6 & filter8 & filter10 & filter12]
+    dataframe3=dataframe[filter1 & filter4 & filter5 & filter6 & filter8]
 
     # grouping by and sending the messages
     for chat_id, data in dataframe3.groupby('fc_chat'):
