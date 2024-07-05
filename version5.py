@@ -287,7 +287,7 @@ if __name__ == "__main__":
             #     gs.update_cell(row['row_num'], 13, "Sent")
             # send_message(585511605,"All Done!")
 
-            time.sleep(1)
+            #time.sleep(1)
             
 
     dataframe3=dataframe[filter1 & filter4 & filter5 & filter6 & filter8]
