@@ -224,7 +224,7 @@ if __name__ == "__main__":
         ms.update_cell(1, 2, update_id_update)
 
     ### Translation finalize
-    gc=gspread.service_account(filename='creds.json')
+    gc=gspread.service_account(filename='credentials.json')
     key_='1uOspkth_a7jxrNODZNtMBDW7H9NgEyvF1Plp6qABvfE'
     ### Reading in the specific googles sheets file
     sh=gc.open_by_key(key_)
