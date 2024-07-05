@@ -309,7 +309,7 @@ if __name__ == "__main__":
             if send_message(chat_id,text):
                 #gs.update_cell(row['row_num'], 16, "Sent")
                 # gs.update_cell(row['row_num'], 15, f"{datetime.datetime.now()}")
-                # print(f"{datetime.datetime.now()}")
+                print(f"{datetime.datetime.now()}")
             #time.sleep(0.4)
             send_message(585511605,row['item to translate'])
 
