@@ -281,7 +281,7 @@ if __name__ == "__main__":
                 # gs.update_cell(row['row_num'], 15, f"{datetime.datetime.now()}")
                 print(f"{datetime.datetime.now()}")
             #time.sleep(0.4)
-            send_message(585511605,row['item to translate'])
+        send_message(6280714932,str(send_message(chat_id,"There are remaining translation item."))+"from"+str(chat_id))
 
             # if send_message(chat_id, text)==200:
             #     gs.update_cell(row['row_num'], 13, "Sent")
@@ -311,7 +311,7 @@ if __name__ == "__main__":
                 # gs.update_cell(row['row_num'], 15, f"{datetime.datetime.now()}")
                 print(f"{datetime.datetime.now()}")
             #time.sleep(0.4)
-            send_message(585511605,row['item to translate'])
+        send_message(6280714932,str(send_message(chat_id,"There are remaining translation item."))+"from"+str(chat_id))
 
 
 
