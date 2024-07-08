@@ -223,95 +223,55 @@ if __name__ == "__main__":
     if len(x)!=0:
         ms.update_cell(1, 2, update_id_update)
 
-    # ### Translation finalize
-    # gc=gspread.service_account(filename='credentials.json')
-    # key_='1uOspkth_a7jxrNODZNtMBDW7H9NgEyvF1Plp6qABvfE'
-    # ### Reading in the specific googles sheets file
-    # sh=gc.open_by_key(key_)
+    # grouping by and sending the messages
+    # Reading in the specific googles sheets file
 
-    # # print(sh.worksheet('Data_Quality'))
+    ### Reading in the specific googles sheets file
+    key_='1jMi73_wf6nTD3rSJQ2ir0epMft6CHnmQRcq1xQhnA4k'
+    sh=gc.open_by_key(key_)
 
-
-    # gs=sh.worksheet('Data Quality - Translations')
+    # print(sh.worksheet('Data_Quality'))
 
 
-    # # ### Reading in the specific googles sheets file
-    # _all=sh.worksheet('Data Quality - Translations').get_all_records()
+    gs=sh.worksheet('Data Quality')
 
-    # # working on the gsheets returned
-    # dataframe = pd.DataFrame(_all)
-    # #filtering the ones that need response if both pending and enum response is empty
-    # filter1= dataframe['FC Response']==""
-    # filter2= dataframe['Enum Response']==""
-    # # filter3=dataframe['Identifier']==""
-    # filter4=dataframe['fc_chat']!=""
-    # filter5=dataframe['enum_chat']!=""
-    # filter6=dataframe['TASK_STATUS']=="Pending"
-    # filter7=dataframe['Enum Response']==""
-    # filter8=dataframe['FC Response']==""
-    # filter9=dataframe['enum_send']==""
-    # filter10=dataframe['fc_send']==""
-    # filter11=dataframe['Enum Response']==""
-    # filter12=dataframe['FC Response']==""
+    _all=sh.worksheet('Data Quality').get_all_records()
 
-    # # filter5= dataframe['Pending Main']=="Pending"
+    # working on the gsheets returned
+    dataframe = pd.DataFrame(_all)
+    #filtering the ones that need response if both pending and enum response is empty
+    filter1= dataframe['Comment Enumerator']==""
+    filter2= dataframe['Status']=="Pending"
+    filter3=dataframe['Sent']==""
+    filter4=dataframe['Chat_id']!=""
+    filter5= dataframe['Pending Main']=="Pending"
 
-    # # # adding a dataframe to identify row
-    # dataframe['row_num']=dataframe.index+2
+    # # adding a dataframe to identify row
+    dataframe['row_num']=dataframe.index+2
+    dataframe=dataframe[filter1 & filter2 & filter4 & filter5 ]
+    for chat_id, data in dataframe.groupby('Chat_id'):
+            count_=data.count()['Variable']
+            print(count_)
+            name_=list(data['DC ID'])[0]
+        # print(chat_id)
+        # for index, row in data.iterrows():
+        #     text=(str(dict(row)))
+            text =  "<a href='https://www.laterite.com/'>Data Quality Bot</a>" \
+            + "\n" + f"<b>Enumerator Name: </b>"+ name_ + \
+                "\n" +   f"<b>Number of Data Quality Items: </b>" + str(count_) 
+            #     "\n" +   f"<b>Variable: </b>" + row['Variable'] \
+            #     +  "\n" +   f"<b>Data Quality Question :</b>" + row['Comment'] \
+            # + "\n" +  f"<b>Project ID: </b> WB_HH_R8" 
+            # text = f"<span class='tg-spoiler'>Enumerator Name:</span>"+ row['Enumerator Name'] +  "\n" +   f"<strong>Variable Name:</strong>" + row['variable']  
 
-    # #filtering the ones that need response
-    # dataframe2=dataframe[filter2 & filter4 & filter5 & filter6 & filter7 ]
-
-    # # grouping by and sending the messages
-    # for chat_id, data in dataframe2.groupby('enum_chat'):
-    #     # print(chat_id)
-    #     for index, row in data.iterrows():
-    #         text=(str(dict(row)))
-    #         text =  "<a href='https://www.laterite.com/'>Data Quality Bot </a>"  \
-    #         + "\n" + f"<b>Enumerator Name: </b>"+ row['enum_name'] + \
-    #             "\n" +   f"<b>HHID: </b>" + str(row['HHID'])  + \
-    #             "\n" +   f"<b>Variable: </b>" + row['Variable'] \
-    #             +  "\n" +   f"<b>Translation Item :</b>" + row['item to translate'] \
-    #         + "\n" +  f"<b>Task:</b> Translation" 
-    #         # text = f"<span class='tg-spoiler'>Enumerator Name:</span>"+ row['Enumerator Name'] +  "\n" +   f"<strong>Variable Name:</strong>" + row['variable']  
-
-    #         print(text)
-    #         if send_message(chat_id,text):
-    #             #gs.update_cell(row['row_num'], 15, "Sent")
-    #             # gs.update_cell(row['row_num'], 15, f"{datetime.datetime.now()}")
-    #             print(f"{datetime.datetime.now()}")
-    #         #time.sleep(0.4)
-    #     send_message(6280714932,str(send_message(chat_id,"There are remaining translation item."))+"from"+str(chat_id))
-
-    #         # if send_message(chat_id, text)==200:
-    #         #     gs.update_cell(row['row_num'], 13, "Sent")
-    #         # send_message(585511605,"All Done!")
-
-    #         #time.sleep(1)
+            print(text)
             
-
-    # dataframe3=dataframe[filter1 & filter4 & filter5 & filter6 & filter8]
-
-    # # grouping by and sending the messages
-    # for chat_id, data in dataframe3.groupby('fc_chat'):
-    #     # print(chat_id)
-    #     for index, row in data.iterrows():
-    #         text=(str(dict(row)))
-    #         text =  "<a href='https://www.laterite.com/'>Data Quality Bot </a>"  \
-    #         + "\n" + f"<b>FC Name: </b>"+ row['fc_name'] + \
-    #             "\n" +   f"<b>HHID: </b>" + str(row['HHID'])  + \
-    #             "\n" +   f"<b>Variable: </b>" + row['Variable'] \
-    #             +  "\n" +   f"<b>Translation Item :</b>" + row['item to translate'] \
-    #         + "\n" + f"<b>Task:</b> Translation"
-    #         # text = f"<span class='tg-spoiler'>Enumerator Name:</span>"+ row['Enumerator Name'] +  "\n" +   f"<strong>Variable Name:</strong>" + row['variable']  
-
-    #         print(text)
-    #         if send_message(chat_id,text):
-    #             #gs.update_cell(row['row_num'], 16, "Sent")
-    #             # gs.update_cell(row['row_num'], 15, f"{datetime.datetime.now()}")
-    #             print(f"{datetime.datetime.now()}")
-    #         #time.sleep(0.4)
-    #     send_message(6280714932,str(send_message(chat_id,"There are remaining translation item."))+"from"+str(chat_id))
+            print(send_message(chat_id, text))
+            print(send_message(585511605, text))
+            if send_message(chat_id, text)==200:
+                # gs.update_cell(row['row_num'], 13, "Sent")
+                # gs.update_cell(row['row_num'], 15, f"{datetime.datetime.now()}")
+                send_message(585511605, text)
 
 
 
