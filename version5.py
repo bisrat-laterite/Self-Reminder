@@ -143,7 +143,7 @@ if __name__ == "__main__":
     # y.to_excel(f'check2_{str(datetime.date.today())}.xlsx')
     # # editing the gsheet based on the messages sent
     for mes in messages:
-        # print(mes)
+        print(mes)
         if 'edited_message' in mes:
             message=mes['edited_message']
             # print(message['text'])
@@ -152,7 +152,7 @@ if __name__ == "__main__":
             message=mes['message']
             # print(message['text'])
             # print('not edited')
-        if 'reply_to_message' in message and message['reply_to_message']['from']['first_name']== 'Data Quality Bot':
+        if 'reply_to_message' in message and message['reply_to_message']['from']['first_name']== 'Data Quality Bot' and 'Number of Data Quality Items' not in message['reply_to_message']['text']:
             # print(message)
             pre_message_inf=message['reply_to_message']
             if 'text' in pre_message_inf:
