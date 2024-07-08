@@ -266,12 +266,13 @@ if __name__ == "__main__":
 
             print(text)
             
-            print(send_message(chat_id, text))
-            print(send_message(585511605, text))
+            # print(send_message(chat_id, text))
+            # print(send_message(585511605, text))
             if send_message(chat_id, text)==200:
                 # gs.update_cell(row['row_num'], 13, "Sent")
                 # gs.update_cell(row['row_num'], 15, f"{datetime.datetime.now()}")
                 send_message(585511605, text)
+            #send_message(585511605, text)
 
 
 
