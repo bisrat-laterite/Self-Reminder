@@ -304,6 +304,10 @@ if __name__ == "__main__":
             + "\n" +  f"<b>Project ID: </b> WB_HH_R8" 
             sent_status=send_message(chat_id, text)
             send_message(585511605, str(sent_status)+ f" from {row['DC ID']}")
+            if sent_status==200 and filter3:
+                gs.update_cell(row['row_num'], 13, "Sent")
+                gs.update_cell(row['row_num'], 15, f"{datetime.datetime.now()}")
+                # send_message(585511605, text)
 
         # time.sleep(2)
 
