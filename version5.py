@@ -274,6 +274,39 @@ if __name__ == "__main__":
                 send_message(585511605, text)
             #send_message(585511605, text)
 
+    # _all=sh.worksheet('Data Quality').get_all_records()
+
+    # working on the gsheets returned
+    dataframe = pd.DataFrame(_all)
+    #filtering the ones that need response if both pending and enum response is empty
+    filter1= dataframe['Comment Enumerator']==""
+    filter2= dataframe['Status']=="Pending"
+    filter3=dataframe['Sent']==""
+    filter4=dataframe['Chat_id']!=""
+    filter5= dataframe['Pending Main']=="Pending"
+
+    # # adding a dataframe to identify row
+    dataframe['row_num']=dataframe.index+2
+
+    #filtering the ones that need response
+    dataframe=dataframe[filter1 & filter2 & filter4 & filter5 ]
+
+    # grouping by and sending the messages
+    for chat_id, data in dataframe.groupby('Chat_id'):
+        # print(chat_id)
+        for index, row in data.iterrows():
+            text=(str(dict(row)))
+            text =  "<a href='https://www.laterite.com/'>Data Quality Bot</a>" \
+            + "\n" + f"<b>Enumerator Name: </b>"+ row['DC ID'] + \
+                "\n" +   f"<b>HHID: </b>" + str(row['HHID'])  + \
+                "\n" +   f"<b>Variable: </b>" + row['Variable'] \
+                +  "\n" +   f"<b>Data Quality Question :</b>" + row['Comment'] \
+            + "\n" +  f"<b>Project ID: </b> WB_HH_R8" 
+            sent_status=send_message(chat_id, text)
+            send_message(585511605, str(sent_status)+ f" from {row['DC ID']}")
+
+        # time.sleep(2)
+
 
 
 
