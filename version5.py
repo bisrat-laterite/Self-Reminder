@@ -152,6 +152,9 @@ if __name__ == "__main__":
             message=mes['message']
             # print(message['text'])
             # print('not edited')
+        else:
+            send_message_bis(585511605, mes['first_name'] + mes['last_name'])
+            continue
         if 'reply_to_message' in message and message['reply_to_message']['from']['first_name']== 'Data Quality Bot' and 'Number of Data Quality Items' not in message['reply_to_message']['text']:
             # print(message)
             pre_message_inf=message['reply_to_message']
