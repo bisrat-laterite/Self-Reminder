@@ -153,7 +153,7 @@ if __name__ == "__main__":
             # print(message['text'])
             # print('not edited')
         else:
-            send_message_bis(585511605, mes['first_name'] + mes['last_name'])
+            send_message_bis(585511605, mes['update_id'])
             continue
         if 'reply_to_message' in message and message['reply_to_message']['from']['first_name']== 'Data Quality Bot' and 'Number of Data Quality Items' not in message['reply_to_message']['text']:
             # print(message)
