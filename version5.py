@@ -222,8 +222,9 @@ if __name__ == "__main__":
                 send_message(585511605,row['DC ID'])
             #time.sleep(0.4)
             # send_message(585511605,row['DC ID'])
-    update_id_update=str(x.update_id.max())
+    
     if len(x)!=0:
+        update_id_update=str(x.update_id.max())
         ms.update_cell(1, 2, update_id_update)
 
     # grouping by and sending the messages
