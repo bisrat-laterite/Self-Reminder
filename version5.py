@@ -153,14 +153,15 @@ if __name__ == "__main__":
     # # editing the gsheet based on the messages sent
     for mes in messages:
         print(mes)
-        if 'text' in mes['message'] and 'reply_to_message' not in mes['message'] and 'message' in mes:
-            print("Text:"+str(mes['message']['text']))
-            print("From Id:" + str(mes['message']['from']['id']))
-            text="<a href='https://www.laterite.com/'>Data Quality Bot</a>" \
-          + "\n" + f"<b>ID: </b>"+ str(mes['message']['from']['id']) + \
-              "\n" +   f"<b>NAME: </b>" + str(mes['message']['text']) + \
-              "\n" + f"<b>USER NAME: </b>" +str(mes['message']['from']['first_name'])
-            send_message_bis(585511605, text )
+        if 'message' in mes:
+            if 'text' in mes['message'] and 'reply_to_message' not in mes['message']
+                print("Text:"+str(mes['message']['text']))
+                print("From Id:" + str(mes['message']['from']['id']))
+                text="<a href='https://www.laterite.com/'>Data Quality Bot</a>" \
+            + "\n" + f"<b>ID: </b>"+ str(mes['message']['from']['id']) + \
+                "\n" +   f"<b>NAME: </b>" + str(mes['message']['text']) + \
+                "\n" + f"<b>USER NAME: </b>" +str(mes['message']['from']['first_name'])
+                send_message_bis(585511605, text )
         if 'edited_message' in mes:
             message=mes['edited_message']
             # print(message['text'])
