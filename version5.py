@@ -154,7 +154,7 @@ if __name__ == "__main__":
     for mes in messages:
         print(mes)
         if 'message' in mes:
-            if 'text' in mes['message'] and 'reply_to_message' not in mes['message']
+            if 'text' in mes['message'] and 'reply_to_message' not in mes['message']:
                 print("Text:"+str(mes['message']['text']))
                 print("From Id:" + str(mes['message']['from']['id']))
                 text="<a href='https://www.laterite.com/'>Data Quality Bot</a>" \
