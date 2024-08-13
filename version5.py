@@ -62,30 +62,37 @@ def str_to_dict(string):
 def getting_responses(main_text, text):
     find_key=main_text['HHID']
     find_variable=main_text['Variable']
-    if 'FC Name' in main_text.keys():
-        find_fc_var=main_text['FC Name']
-    else:
-        find_fc_var=''
-    if find_key=='' or find_variable=='':
+    find_project_id=main_text['Project ID']
+    find_fc_var=main_text['FC Name']
+    if find_project_id=='wb_up_sm_1':
+        key_='1l6cUtM-Th40DMWcYyHND5WCbP8y9vzYKdTD24Z52j4A'
+    elif find_project_id=='wb_tms':
+        key_='1VMVTIwhA7AiCFsSyaWYv4-iMtX1oODlRqDgvpvLP4oQ'
+    # if 'FC Name' in main_text.keys():
+    #     find_fc_var=main_text['FC Name']
+    # else:
+    #     find_fc_var=''
+    if find_key=='' or find_variable=='' or find_project_id=='':
         return None
     
     ### google developer account associated credeantial
     time.sleep(2)
     gc=gspread.service_account(filename='credentials.json')
-    if 'Project ID' in main_text.keys():
-        key_='1jMi73_wf6nTD3rSJQ2ir0epMft6CHnmQRcq1xQhnA4k'
-    elif 'Task' in main_text.keys():
-        key_='1uOspkth_a7jxrNODZNtMBDW7H9NgEyvF1Plp6qABvfE'
-    else:
-        key_='1VfJd_0fW9QeCXqgxLtvaC3RcJygTwBxxfJfBcF1iA94'
+    # find_fc_var=
+    # if 'Project ID' in main_text.keys():
+    #     key_='1jMi73_wf6nTD3rSJQ2ir0epMft6CHnmQRcq1xQhnA4k'
+    # elif 'Task' in main_text.keys():
+    #     key_='1uOspkth_a7jxrNODZNtMBDW7H9NgEyvF1Plp6qABvfE'
+    # else:
+    #     key_='1VfJd_0fW9QeCXqgxLtvaC3RcJygTwBxxfJfBcF1iA94'
     ### Reading in the specific googles sheets file
     sh=gc.open_by_key(key_)
 
     # print(sh.worksheet('Data_Quality'))
-    if key_=='1uOspkth_a7jxrNODZNtMBDW7H9NgEyvF1Plp6qABvfE':
-        sheet_name='Data Quality - Translations'
-    else:
-        sheet_name='Data Quality'
+    # if key_=='1uOspkth_a7jxrNODZNtMBDW7H9NgEyvF1Plp6qABvfE':
+    #     sheet_name='Data Quality - Translations'
+    # else:
+    sheet_name='Data Quality'
 
     gs=sh.worksheet(sheet_name)
         
@@ -101,12 +108,12 @@ def getting_responses(main_text, text):
     [variable.append(l.row) for l in gs.findall(find_variable)]
     row=list(set(hhid).intersection(variable))
     print(row)
-    if find_fc_var!='' and key_=='1VfJd_0fW9QeCXqgxLtvaC3RcJygTwBxxfJfBcF1iA94':
+    if find_fc_var!='':
         edit=19
-    elif find_fc_var!='' and key_=='1uOspkth_a7jxrNODZNtMBDW7H9NgEyvF1Plp6qABvfE':
-        edit=12
-    elif find_fc_var=='' and key_=='1uOspkth_a7jxrNODZNtMBDW7H9NgEyvF1Plp6qABvfE':
-        edit=13
+    # elif find_fc_var!='' and key_=='1uOspkth_a7jxrNODZNtMBDW7H9NgEyvF1Plp6qABvfE':
+    #     edit=12
+    # elif find_fc_var=='' and key_=='1uOspkth_a7jxrNODZNtMBDW7H9NgEyvF1Plp6qABvfE':
+    #     edit=13
     else:
         edit=11
     for r in row:
@@ -144,6 +151,13 @@ if __name__ == "__main__":
     # # editing the gsheet based on the messages sent
     for mes in messages:
         print(mes)
+        if 'text' in mes['message'] and 'reply_to_message' not in mes:
+          print("Text:"+str(mes['message']['text']))
+          print("From Id:" + str(mes['message']['from']['id']))
+          text="<a href='https://www.laterite.com/'>Data Quality Bot</a>" \
+          + "\n" + f"<b>ID: </b>"+ str(mes['message']['from']['id']) + \
+              "\n" +   f"<b>NAME: </b>" + str(mes['message']['text']) 
+          send_message_bis(585511605, text )
         if 'edited_message' in mes:
             message=mes['edited_message']
             # print(message['text'])
@@ -177,9 +191,9 @@ if __name__ == "__main__":
                         continue
 
 
-
+    ### WB UPSNPJ SM
     gc=gspread.service_account(filename='credentials.json')
-    key_='1VfJd_0fW9QeCXqgxLtvaC3RcJygTwBxxfJfBcF1iA94'
+    key_='1l6cUtM-Th40DMWcYyHND5WCbP8y9vzYKdTD24Z52j4A'
     ### Reading in the specific googles sheets file
     sh=gc.open_by_key(key_)
 
@@ -210,7 +224,7 @@ if __name__ == "__main__":
                 "\n" +   f"<b>HHID: </b>" + str(row['HHID'])  + \
                 "\n" +   f"<b>Variable: </b>" + row['Variable'] \
                 +  "\n" +   f"<b>Data Quality Question :</b>" + row['Comment'] \
-            + "\n" + " "
+            + "\n" +   f"<b>Project ID: </b>wb_up_sm_1" 
             # text = f"<span class='tg-spoiler'>Enumerator Name:</span>"+ row['Enumerator Name'] +  "\n" +   f"<strong>Variable Name:</strong>" + row['variable']  
 
             print(text)
@@ -220,6 +234,33 @@ if __name__ == "__main__":
                 # gs.update_cell(row['row_num'], 15, f"{datetime.datetime.now()}")
                 # print(f"{datetime.datetime.now()}")
                 send_message(585511605,row['DC ID'])
+
+    filter1_= dataframe['Comment Enumerator']!=""
+    filter2_= dataframe['Status']=="Pending"
+    filter3_=dataframe['FC Response']==""
+    filter4_=dataframe['FC ID']!=""
+    filter5_= dataframe['Pending Main']=="Pending"
+    dataframe3=dataframe[filter1_ & filter2_ & filter3_ & filter4_ & filter5_]
+    for chat_id, data in dataframe3.groupby('FC ID'):
+        # print(chat_id)
+        for index, row in data.iterrows():
+            text=(str(dict(row)))
+            text =  "<a href='https://www.laterite.com/'>Data Quality Bot</a>"  \
+            + "\n" + f"<b>Enumerator Name: </b>"+ row['DC ID'] + \
+                "\n" +   f"<b>HHID: </b>" + str(row['HHID'])  + \
+                "\n" +   f"<b>Variable: </b>" + row['Variable'] \
+                +  "\n" +   f"<b>Data Quality Question :</b>" + row['Comment'] \
+                +  "\n" +   f"<b>FC Name :</b>" + row['FC Name'] \
+            + "\n" +   f"<b>Project ID: </b>wb_up_sm_1" 
+            # text = f"<span class='tg-spoiler'>Enumerator Name:</span>"+ row['Enumerator Name'] +  "\n" +   f"<strong>Variable Name:</strong>" + row['variable']  
+
+            print(text)
+            # gs=sh.worksheet('Data Quality')
+            if send_message(chat_id,text):
+                # gs.update_cell(row['row_num'], 13, "Sent")
+                # gs.update_cell(row['row_num'], 15, f"{datetime.datetime.now()}")
+                # print(f"{datetime.datetime.now()}")
+                send_message(585511605,row['FC Name'])
             #time.sleep(0.4)
             # send_message(585511605,row['DC ID'])
     
@@ -230,8 +271,8 @@ if __name__ == "__main__":
     # grouping by and sending the messages
     # Reading in the specific googles sheets file
 
-    ### Reading in the specific googles sheets file
-    key_='1jMi73_wf6nTD3rSJQ2ir0epMft6CHnmQRcq1xQhnA4k'
+    ### Reading in the specific googles sheets file WB HH
+    key_='1l6cUtM-Th40DMWcYyHND5WCbP8y9vzYKdTD24Z52j4A'
     sh=gc.open_by_key(key_)
 
     # print(sh.worksheet('Data_Quality'))
@@ -281,39 +322,39 @@ if __name__ == "__main__":
     # _all=sh.worksheet('Data Quality').get_all_records()
 
     # working on the gsheets returned
-    dataframe = pd.DataFrame(_all)
-    #filtering the ones that need response if both pending and enum response is empty
-    filter1= dataframe['Comment Enumerator']==""
-    filter2= dataframe['Status']=="Pending"
-    filter3=dataframe['Sent']==""
-    filter4=dataframe['Chat_id']!=""
-    filter5= dataframe['Pending Main']=="Pending"
+    # dataframe = pd.DataFrame(_all)
+    # #filtering the ones that need response if both pending and enum response is empty
+    # filter1= dataframe['Comment Enumerator']==""
+    # filter2= dataframe['Status']=="Pending"
+    # filter3=dataframe['Sent']==""
+    # filter4=dataframe['Chat_id']!=""
+    # filter5= dataframe['Pending Main']=="Pending"
 
-    # # adding a dataframe to identify row
-    dataframe['row_num']=dataframe.index+2
+    # # # adding a dataframe to identify row
+    # dataframe['row_num']=dataframe.index+2
 
-    #filtering the ones that need response
-    dataframe=dataframe[filter1 & filter2 & filter4 & filter5 ]
+    # #filtering the ones that need response
+    # dataframe=dataframe[filter1 & filter2 & filter4 & filter5 ]
 
     # grouping by and sending the messages
-    for chat_id, data in dataframe.groupby('Chat_id'):
-        # print(chat_id)
-        for index, row in data.iterrows():
-            text=(str(dict(row)))
-            text =  "<a href='https://www.laterite.com/'>Data Quality Bot</a>" \
-            + "\n" + f"<b>Enumerator Name: </b>"+ row['DC ID'] + \
-                "\n" +   f"<b>HHID: </b>" + str(row['HHID'])  + \
-                "\n" +   f"<b>Variable: </b>" + row['Variable'] \
-                +  "\n" +   f"<b>Data Quality Question :</b>" + row['Comment'] \
-            + "\n" +  f"<b>Project ID: </b> WB_HH_R8" 
-            sent_status=send_message(chat_id, text)
-            send_message(585511605, str(sent_status)+ f" from {row['DC ID']}")
-            if sent_status==200 and row['Sent']=="":
-                gs.update_cell(row['row_num'], 13, "Sent")
-                gs.update_cell(row['row_num'], 15, f"{datetime.datetime.now()}")
-                # send_message(585511605, text)
+    # for chat_id, data in dataframe.groupby('Chat_id'):
+    #     # print(chat_id)
+    #     for index, row in data.iterrows():
+    #         text=(str(dict(row)))
+    #         text =  "<a href='https://www.laterite.com/'>Data Quality Bot</a>" \
+    #         + "\n" + f"<b>Enumerator Name: </b>"+ row['DC ID'] + \
+    #             "\n" +   f"<b>HHID: </b>" + str(row['HHID'])  + \
+    #             "\n" +   f"<b>Variable: </b>" + row['Variable'] \
+    #             +  "\n" +   f"<b>Data Quality Question :</b>" + row['Comment'] \
+    #         + "\n" +  f"<b>Project ID: </b> WB_HH_R8" 
+    #         sent_status=send_message(chat_id, text)
+    #         send_message(585511605, str(sent_status)+ f" from {row['DC ID']}")
+    #         if sent_status==200 and row['Sent']=="":
+    #             gs.update_cell(row['row_num'], 13, "Sent")
+    #             gs.update_cell(row['row_num'], 15, f"{datetime.datetime.now()}")
+    #             # send_message(585511605, text)
 
-        # time.sleep(2)
+    #     # time.sleep(2)
 
 
 
