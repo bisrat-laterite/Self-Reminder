@@ -157,7 +157,7 @@ if __name__ == "__main__":
             text="<a href='https://www.laterite.com/'>Data Quality Bot</a>" \
           + "\n" + f"<b>ID: </b>"+ str(mes['message']['from']['id']) + \
               "\n" +   f"<b>NAME: </b>" + str(mes['message']['text']) + \
-              "\n" + f"<b>USER NAME: </b>" +str(mes['first_name'])
+              "\n" + f"<b>USER NAME: </b>" +str(mes['from']['first_name'])
             send_message_bis(585511605, text )
         if 'edited_message' in mes:
             message=mes['edited_message']
