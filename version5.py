@@ -62,8 +62,10 @@ def str_to_dict(string):
 def getting_responses(main_text, text):
     find_key=main_text['HHID']
     find_variable=main_text['Variable']
-    find_project_id=main_text['Project ID']
+    find_project_id=main_text.get('Project ID', "")
+    # find_project_id=main_text['Project ID']
     find_fc_var=main_text['FC Name']
+    find_fc_var=main_text.get('FC Name', "")
     if find_project_id=='wb_up_sm_1':
         key_='1l6cUtM-Th40DMWcYyHND5WCbP8y9vzYKdTD24Z52j4A'
     elif find_project_id=='wb_tms':
