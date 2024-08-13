@@ -64,7 +64,7 @@ def getting_responses(main_text, text):
     find_variable=main_text['Variable']
     find_project_id=main_text.get('Project ID', "")
     # find_project_id=main_text['Project ID']
-    find_fc_var=main_text['FC Name']
+    # find_fc_var=main_text['FC Name']
     find_fc_var=main_text.get('FC Name', "")
     if find_project_id=='wb_up_sm_1':
         key_='1l6cUtM-Th40DMWcYyHND5WCbP8y9vzYKdTD24Z52j4A'
@@ -153,7 +153,7 @@ if __name__ == "__main__":
     # # editing the gsheet based on the messages sent
     for mes in messages:
         print(mes)
-        if 'text' in mes['message'] and 'reply_to_message' not in mes:
+        if 'text' in mes['message'] and 'reply_to_message' not in mes['message'] :
             print("Text:"+str(mes['message']['text']))
             print("From Id:" + str(mes['message']['from']['id']))
             text="<a href='https://www.laterite.com/'>Data Quality Bot</a>" \
