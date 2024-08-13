@@ -253,6 +253,7 @@ if __name__ == "__main__":
                 "\n" +   f"<b>HHID: </b>" + str(row['HHID'])  + \
                 "\n" +   f"<b>Variable: </b>" + row['Variable'] \
                 +  "\n" +   f"<b>Data Quality Question :</b>" + row['Comment'] \
+                +  "\n" +   f"<b>Enum Response :</b>" + row['Comment Enumerator'] \
                 +  "\n" +   f"<b>FC Name :</b>" + row['FC Name'] \
             + "\n" +   f"<b>Project ID: </b>wb_up_sm_1" 
             # text = f"<span class='tg-spoiler'>Enumerator Name:</span>"+ row['Enumerator Name'] +  "\n" +   f"<strong>Variable Name:</strong>" + row['variable']  
