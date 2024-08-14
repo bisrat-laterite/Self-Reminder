@@ -154,6 +154,15 @@ if __name__ == "__main__":
     for mes in messages:
         print(mes)
         if 'message' in mes:
+            if 'my_chat_member' in mes:
+                #my_chat_member.from.id
+                status=mes['my_chat_member']['new_chat_member']['status']
+                id=mes['my_chat_member']['from']['id']
+                new_memb=mes['my_chat_member']['new_chat_member']['user']['id']
+                #my_chat_member.new_chat_member.user.id
+                send_message_bis(585511605, status+ str(id)+ "left")
+                send_message_bis(585511605, status+ str(new_memb)+ "joined")
+
             if 'text' in mes['message'] and 'reply_to_message' not in mes['message']:
                 print("Text:"+str(mes['message']['text']))
                 print("From Id:" + str(mes['message']['from']['id']))
