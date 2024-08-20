@@ -247,6 +247,7 @@ if __name__ == "__main__":
                 # gs.update_cell(row['row_num'], 15, f"{datetime.datetime.now()}")
                 # print(f"{datetime.datetime.now()}")
                 send_message(585511605,row['DC ID'])
+                send_message(585511605,text)
 
     filter1_= dataframe['Comment Enumerator']!=""
     filter2_= dataframe['Status']=="Pending"
@@ -328,7 +329,7 @@ if __name__ == "__main__":
             # print(send_message(chat_id, text))
             # print(send_message(585511605, text))
             if send_message(chat_id, text)==200:
-                # gs.update_cell(row['row_num'], 13, "Sent")
+                # gs.update_cell(row['row_num'], 13, "Sent")d
                 # gs.update_cell(row['row_num'], 15, f"{datetime.datetime.now()}")
                 send_message(585511605, text)
             #send_message(585511605, text)
