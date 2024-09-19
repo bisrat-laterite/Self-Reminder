@@ -8,7 +8,8 @@ import time
 
 ##function to send the message of the data quality questions 
 def send_message_bis(chat_id,text):
-  base_url="https://api.telegram.org/bot6176422429:AAHpWNC6B_rmnRVpoF1ueIhtiD3JOs2twDI/sendMessage"
+  token="6081280787:AAF3HKZAORELluBhj0A90cv62QAWd8ex_Hw"
+  base_url=f"https://api.telegram.org/bot{token}/sendMessage"
   parameters={
         'chat_id':chat_id,
         'text':text,
@@ -21,7 +22,8 @@ def send_message_bis(chat_id,text):
 
 ##function to send the message of the data quality questions 
 def send_message(chat_id,text):
-  base_url="https://api.telegram.org/bot6176422429:AAHpWNC6B_rmnRVpoF1ueIhtiD3JOs2twDI/sendMessage"
+  token="6081280787:AAF3HKZAORELluBhj0A90cv62QAWd8ex_Hw"
+  base_url=f"https://api.telegram.org/bot{token}/sendMessage"
   parameters={
         'chat_id':chat_id,
         'text':text,
@@ -34,7 +36,8 @@ def send_message(chat_id,text):
 
 ### function for reading in the responses to the data quality questions sent
 def read_msg(update_id):
-  base_url="https://api.telegram.org/bot6176422429:AAHpWNC6B_rmnRVpoF1ueIhtiD3JOs2twDI/"
+  token="6081280787:AAF3HKZAORELluBhj0A90cv62QAWd8ex_Hw"
+  base_url=f"https://api.telegram.org/bot{token}/"
   parameters={
         'offset':update_id 
 
