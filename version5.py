@@ -208,133 +208,133 @@ if __name__ == "__main__":
 
 
     ### WB UPSNPJ SM
-    gc=gspread.service_account(filename='credentials.json')
-    key_='1l6cUtM-Th40DMWcYyHND5WCbP8y9vzYKdTD24Z52j4A'
-    ### Reading in the specific googles sheets file
-    sh=gc.open_by_key(key_)
+    # gc=gspread.service_account(filename='credentials.json')
+    # key_='1l6cUtM-Th40DMWcYyHND5WCbP8y9vzYKdTD24Z52j4A'
+    # ### Reading in the specific googles sheets file
+    # sh=gc.open_by_key(key_)
 
-    _all=sh.worksheet('Data Quality').get_all_records()
+    # _all=sh.worksheet('Data Quality').get_all_records()
 
-    # working on the gsheets returned
-    dataframe = pd.DataFrame(_all)
-    #filtering the ones that need response if both pending and enum response is empty
-    filter1= dataframe['Comment Enumerator']==""
-    filter2= dataframe['Status']=="Pending"
-    filter3=dataframe['Identifier']==""
-    filter4=dataframe['Chat_id']!=""
-    filter5= dataframe['Pending Main']=="Pending"
+    # # working on the gsheets returned
+    # dataframe = pd.DataFrame(_all)
+    # #filtering the ones that need response if both pending and enum response is empty
+    # filter1= dataframe['Comment Enumerator']==""
+    # filter2= dataframe['Status']=="Pending"
+    # filter3=dataframe['Identifier']==""
+    # filter4=dataframe['Chat_id']!=""
+    # filter5= dataframe['Pending Main']=="Pending"
 
-    # # adding a dataframe to identify row
-    dataframe['row_num']=dataframe.index+2
+    # # # adding a dataframe to identify row
+    # dataframe['row_num']=dataframe.index+2
 
-    #filtering the ones that need response
-    dataframe2=dataframe[filter1 & filter2 & filter4 & filter5 ]
+    # #filtering the ones that need response
+    # dataframe2=dataframe[filter1 & filter2 & filter4 & filter5 ]
 
-    # grouping by and sending the messages
-    for chat_id, data in dataframe2.groupby('Chat_id'):
-        # print(chat_id)
-        for index, row in data.iterrows():
-            text=(str(dict(row)))
-            text =  "<a href='https://www.laterite.com/'>Data Quality Bot</a>"  \
-            + "\n" + f"<b>Enumerator Name: </b>"+ row['DC ID'] + \
-                "\n" +   f"<b>HHID: </b>" + str(row['HHID'])  + \
-                "\n" +   f"<b>Variable: </b>" + row['Variable'] \
-                +  "\n" +   f"<b>Data Quality Question :</b>" + row['Comment'] \
-            + "\n" +   f"<b>Project ID: </b>wb_up_sm_1" 
-            # text = f"<span class='tg-spoiler'>Enumerator Name:</span>"+ row['Enumerator Name'] +  "\n" +   f"<strong>Variable Name:</strong>" + row['variable']  
+    # # grouping by and sending the messages
+    # for chat_id, data in dataframe2.groupby('Chat_id'):
+    #     # print(chat_id)
+    #     for index, row in data.iterrows():
+    #         text=(str(dict(row)))
+    #         text =  "<a href='https://www.laterite.com/'>Data Quality Bot</a>"  \
+    #         + "\n" + f"<b>Enumerator Name: </b>"+ row['DC ID'] + \
+    #             "\n" +   f"<b>HHID: </b>" + str(row['HHID'])  + \
+    #             "\n" +   f"<b>Variable: </b>" + row['Variable'] \
+    #             +  "\n" +   f"<b>Data Quality Question :</b>" + row['Comment'] \
+    #         + "\n" +   f"<b>Project ID: </b>wb_up_sm_1" 
+    #         # text = f"<span class='tg-spoiler'>Enumerator Name:</span>"+ row['Enumerator Name'] +  "\n" +   f"<strong>Variable Name:</strong>" + row['variable']  
 
-            print(text)
-            # gs=sh.worksheet('Data Quality')
-            if send_message(chat_id,text):
-                # gs.update_cell(row['row_num'], 13, "Sent")
-                # gs.update_cell(row['row_num'], 15, f"{datetime.datetime.now()}")
-                # print(f"{datetime.datetime.now()}")
-                send_message(585511605,row['DC ID'])
-                send_message(585511605,text)
+    #         print(text)
+    #         # gs=sh.worksheet('Data Quality')
+    #         if send_message(chat_id,text):
+    #             # gs.update_cell(row['row_num'], 13, "Sent")
+    #             # gs.update_cell(row['row_num'], 15, f"{datetime.datetime.now()}")
+    #             # print(f"{datetime.datetime.now()}")
+    #             send_message(585511605,row['DC ID'])
+    #             send_message(585511605,text)
 
-    filter1_= dataframe['Comment Enumerator']!=""
-    filter2_= dataframe['Status']=="Pending"
-    filter3_=dataframe['FC Response']==""
-    filter4_=dataframe['FC ID']!=""
-    filter5_= dataframe['Pending Main']=="Pending"
-    dataframe3=dataframe[filter1_ & filter2_ & filter3_ & filter4_ & filter5_]
-    for chat_id, data in dataframe3.groupby('FC ID'):
-        # print(chat_id)
-        for index, row in data.iterrows():
-            text=(str(dict(row)))
-            text =  "<a href='https://www.laterite.com/'>Data Quality Bot</a>"  \
-            + "\n" + f"<b>Enumerator Name: </b>"+ row['DC ID'] + \
-                "\n" +   f"<b>HHID: </b>" + str(row['HHID'])  + \
-                "\n" +   f"<b>Variable: </b>" + row['Variable'] \
-                +  "\n" +   f"<b>Data Quality Question :</b>" + row['Comment'] \
-                +  "\n" +   f"<b>Enum Response :</b>" + row['Comment Enumerator'] \
-                +  "\n" +   f"<b>FC Name :</b>" + row['FC Name'] \
-            + "\n" +   f"<b>Project ID: </b>wb_up_sm_1" 
-            # text = f"<span class='tg-spoiler'>Enumerator Name:</span>"+ row['Enumerator Name'] +  "\n" +   f"<strong>Variable Name:</strong>" + row['variable']  
+    # filter1_= dataframe['Comment Enumerator']!=""
+    # filter2_= dataframe['Status']=="Pending"
+    # filter3_=dataframe['FC Response']==""
+    # filter4_=dataframe['FC ID']!=""
+    # filter5_= dataframe['Pending Main']=="Pending"
+    # dataframe3=dataframe[filter1_ & filter2_ & filter3_ & filter4_ & filter5_]
+    # for chat_id, data in dataframe3.groupby('FC ID'):
+    #     # print(chat_id)
+    #     for index, row in data.iterrows():
+    #         text=(str(dict(row)))
+    #         text =  "<a href='https://www.laterite.com/'>Data Quality Bot</a>"  \
+    #         + "\n" + f"<b>Enumerator Name: </b>"+ row['DC ID'] + \
+    #             "\n" +   f"<b>HHID: </b>" + str(row['HHID'])  + \
+    #             "\n" +   f"<b>Variable: </b>" + row['Variable'] \
+    #             +  "\n" +   f"<b>Data Quality Question :</b>" + row['Comment'] \
+    #             +  "\n" +   f"<b>Enum Response :</b>" + row['Comment Enumerator'] \
+    #             +  "\n" +   f"<b>FC Name :</b>" + row['FC Name'] \
+    #         + "\n" +   f"<b>Project ID: </b>wb_up_sm_1" 
+    #         # text = f"<span class='tg-spoiler'>Enumerator Name:</span>"+ row['Enumerator Name'] +  "\n" +   f"<strong>Variable Name:</strong>" + row['variable']  
 
-            print(text)
-            # gs=sh.worksheet('Data Quality')
-            if send_message(chat_id,text):
-                # gs.update_cell(row['row_num'], 13, "Sent")
-                # gs.update_cell(row['row_num'], 15, f"{datetime.datetime.now()}")
-                # print(f"{datetime.datetime.now()}")
-                send_message(585511605,row['FC Name'])
-            #time.sleep(0.4)
-            # send_message(585511605,row['DC ID'])
+    #         print(text)
+    #         # gs=sh.worksheet('Data Quality')
+    #         if send_message(chat_id,text):
+    #             # gs.update_cell(row['row_num'], 13, "Sent")
+    #             # gs.update_cell(row['row_num'], 15, f"{datetime.datetime.now()}")
+    #             # print(f"{datetime.datetime.now()}")
+    #             send_message(585511605,row['FC Name'])
+    #         #time.sleep(0.4)
+    #         # send_message(585511605,row['DC ID'])
     
-    if len(x)!=0:
-        update_id_update=str(x.update_id.max())
-        ms.update_cell(1, 2, update_id_update)
+    # if len(x)!=0:
+    #     update_id_update=str(x.update_id.max())
+    #     ms.update_cell(1, 2, update_id_update)
 
-    # grouping by and sending the messages
-    # Reading in the specific googles sheets file
+    # # grouping by and sending the messages
+    # # Reading in the specific googles sheets file
 
-    ### Reading in the specific googles sheets file WB HH
-    key_='1l6cUtM-Th40DMWcYyHND5WCbP8y9vzYKdTD24Z52j4A'
-    sh=gc.open_by_key(key_)
+    # ### Reading in the specific googles sheets file WB HH
+    # key_='1l6cUtM-Th40DMWcYyHND5WCbP8y9vzYKdTD24Z52j4A'
+    # sh=gc.open_by_key(key_)
 
-    # print(sh.worksheet('Data_Quality'))
+    # # print(sh.worksheet('Data_Quality'))
 
 
-    gs=sh.worksheet('Data Quality')
+    # gs=sh.worksheet('Data Quality')
 
-    _all=sh.worksheet('Data Quality').get_all_records()
+    # _all=sh.worksheet('Data Quality').get_all_records()
 
-    # working on the gsheets returned
-    dataframe = pd.DataFrame(_all)
-    #filtering the ones that need response if both pending and enum response is empty
-    filter1= dataframe['Comment Enumerator']==""
-    filter2= dataframe['Status']=="Pending"
-    filter3=dataframe['Sent']==""
-    filter4=dataframe['Chat_id']!=""
-    filter5= dataframe['Pending Main']=="Pending"
+    # # working on the gsheets returned
+    # dataframe = pd.DataFrame(_all)
+    # #filtering the ones that need response if both pending and enum response is empty
+    # filter1= dataframe['Comment Enumerator']==""
+    # filter2= dataframe['Status']=="Pending"
+    # filter3=dataframe['Sent']==""
+    # filter4=dataframe['Chat_id']!=""
+    # filter5= dataframe['Pending Main']=="Pending"
 
-    # # adding a dataframe to identify row
-    dataframe['row_num']=dataframe.index+2
-    dataframe=dataframe[filter1 & filter2 & filter4 & filter5 ]
-    for chat_id, data in dataframe.groupby('Chat_id'):
-            count_=data.count()['Variable']
-            print(count_)
-            name_=list(data['DC ID'])[0]
-        # print(chat_id)
-        # for index, row in data.iterrows():
-        #     text=(str(dict(row)))
-            text =  "<a href='https://www.laterite.com/'>Data Quality Bot</a>" \
-            + "\n" + f"<b>Enumerator Name: </b>"+ name_ + \
-                "\n" +   f"<b>Number of Data Quality Items: </b>" + str(count_) 
-            #     "\n" +   f"<b>Variable: </b>" + row['Variable'] \
-            #     +  "\n" +   f"<b>Data Quality Question :</b>" + row['Comment'] \
-            # + "\n" +  f"<b>Project ID: </b> WB_HH_R8" 
-            # text = f"<span class='tg-spoiler'>Enumerator Name:</span>"+ row['Enumerator Name'] +  "\n" +   f"<strong>Variable Name:</strong>" + row['variable']  
+    # # # adding a dataframe to identify row
+    # dataframe['row_num']=dataframe.index+2
+    # dataframe=dataframe[filter1 & filter2 & filter4 & filter5 ]
+    # for chat_id, data in dataframe.groupby('Chat_id'):
+    #         count_=data.count()['Variable']
+    #         print(count_)
+    #         name_=list(data['DC ID'])[0]
+    #     # print(chat_id)
+    #     # for index, row in data.iterrows():
+    #     #     text=(str(dict(row)))
+    #         text =  "<a href='https://www.laterite.com/'>Data Quality Bot</a>" \
+    #         + "\n" + f"<b>Enumerator Name: </b>"+ name_ + \
+    #             "\n" +   f"<b>Number of Data Quality Items: </b>" + str(count_) 
+    #         #     "\n" +   f"<b>Variable: </b>" + row['Variable'] \
+    #         #     +  "\n" +   f"<b>Data Quality Question :</b>" + row['Comment'] \
+    #         # + "\n" +  f"<b>Project ID: </b> WB_HH_R8" 
+    #         # text = f"<span class='tg-spoiler'>Enumerator Name:</span>"+ row['Enumerator Name'] +  "\n" +   f"<strong>Variable Name:</strong>" + row['variable']  
 
-            print(text)
+    #         print(text)
             
-            # print(send_message(chat_id, text))
-            # print(send_message(585511605, text))
-            if send_message(chat_id, text)==200:
-                # gs.update_cell(row['row_num'], 13, "Sent")d
-                # gs.update_cell(row['row_num'], 15, f"{datetime.datetime.now()}")
-                send_message(585511605, text)
+    #         # print(send_message(chat_id, text))
+    #         # print(send_message(585511605, text))
+    #         if send_message(chat_id, text)==200:
+    #             # gs.update_cell(row['row_num'], 13, "Sent")d
+    #             # gs.update_cell(row['row_num'], 15, f"{datetime.datetime.now()}")
+    #             send_message(585511605, text)
             #send_message(585511605, text)
 
     # _all=sh.worksheet('Data Quality').get_all_records()
