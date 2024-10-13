@@ -40,7 +40,7 @@ def send_message_bis(chat_id,text):
 
 ##function to send the message of the data quality questions 
 def send_message(chat_id,text):
-  token="6081280787:AAF3HKZAORELluBhj0A90cv62QAWd8ex_Hw"
+  token=TELEGRAM_BOT_TOKEN
   base_url=f"https://api.telegram.org/bot{token}/sendMessage"
   parameters={
         'chat_id':chat_id,
@@ -335,9 +335,9 @@ if __name__=="__main__":
     #         #time.sleep(0.4)
     #         # send_message(585511605,row['DC ID'])
     
-    if len(x)!=0:
-        update_id_update=str(x.update_id.max())
-        ms.update_cell(1, 2, update_id_update)
+    # if len(x)!=0:
+    #     update_id_update=str(x.update_id.max())
+    #     ms.update_cell(1, 2, update_id_update)
 
     # # grouping by and sending the messages
     # # Reading in the specific googles sheets file
