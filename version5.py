@@ -165,7 +165,7 @@ if __name__=="__main__":
         print("y")
         a=read_gsheet(key, "Data Quality - General")
         content=pd.DataFrame(a.get_all_records())
-        if content.columns ==[]:
+        if list(content.columns) ==[]:
             continue
         print(content)
         filtered=content[content['Status'].isin(["Pending", "Clarification Needed"])]
