@@ -165,7 +165,7 @@ if __name__=="__main__":
         print("y")
         a=read_gsheet(key, "Data Quality - General")
         content=pd.DataFrame(a.get_all_records())
-        filtered=filtered[filtered['Status'].isin(["Pending", "Clarification Needed"])]
+        filtered=content[content['Status'].isin(["Pending", "Clarification Needed"])]
         filter_add=filtered['follow_up_response']!=""
         print("check")
         print(key)
