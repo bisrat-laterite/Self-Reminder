@@ -189,7 +189,7 @@ if __name__=="__main__":
             + "\n" +  f"<b>Project ID: </b> "+ dict_from_columns[key]
             x= send_message(chat_id, text)
             if x!=200:
-                send_message(585511605, f"x from {row['Enumerator']}")
+                send_message(585511605, f"x from {row['Enumerator']}, projec P{dict_from_columns[key]}")
 
 
 # if __name__ == "__main__":
