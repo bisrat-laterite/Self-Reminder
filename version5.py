@@ -187,7 +187,9 @@ if __name__=="__main__":
                 +  "\n" +   f"<b>Office follow up :</b>" + str(row['follow_up_response']) \
                 + "\n" + f"<b>Task :</b> Data quality" \
             + "\n" +  f"<b>Project ID: </b> "+ dict_from_columns[key]
-            send_message(chat_id, text)
+            x= send_message(chat_id, text)
+            if x!=200:
+                send_message(585511605, f"x from {row['Enumerator']}")
 
 
 # if __name__ == "__main__":
