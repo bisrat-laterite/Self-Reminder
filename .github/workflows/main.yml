@@ -31,7 +31,7 @@ jobs:
       - name: Run Python script
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
-          bot_token:"6176422429:AAHEaAA3BCZDFIqL7yZgyZneea1evTkfel8"
+          bot_token: "6176422429:AAHEaAA3BCZDFIqL7yZgyZneea1evTkfel8"
         run: |
           echo "$GOOGLE_CREDENTIALS" > credentials.json
           python version5.py
