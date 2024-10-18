@@ -178,18 +178,19 @@ if __name__=="__main__":
         for index, row in filtered.iterrows():
             text=(str(dict(row)))
             chat_id=row['chat_id']
-            text =  "<a href='https://www.laterite.com/'>Data Quality Bot</a>" \
-            + "\n" + f"<b>Enumerator Name: </b>"+ row['Enumerator'] + \
-                "\n" +   f"<b>HHID: </b>" + str(row['HHID'])  + \
-                "\n" +   f"<b>Variable: </b>" + str(row['Variable']) \
-                +  "\n" +   f"<b>Data Quality Question :</b>" + str(row['issue_description']) \
-                +  "\n" +   f"<b>Old response :</b>" + str(row['field_response']) \
-                +  "\n" +   f"<b>Office follow up :</b>" + str(row['follow_up_response']) \
-                + "\n" + f"<b>Task :</b> Data quality" \
-            + "\n" +  f"<b>Project ID: </b> "+ dict_from_columns[key]
-            x= send_message(chat_id, text)
-            if x!=200:
-                send_message(585511605, f"x from {row['Enumerator']}, projec P{dict_from_columns[key]}")
+            if chat_id!="":
+                text =  "<a href='https://www.laterite.com/'>Data Quality Bot</a>" \
+                + "\n" + f"<b>Enumerator Name: </b>"+ row['Enumerator'] + \
+                    "\n" +   f"<b>HHID: </b>" + str(row['HHID'])  + \
+                    "\n" +   f"<b>Variable: </b>" + str(row['Variable']) \
+                    +  "\n" +   f"<b>Data Quality Question :</b>" + str(row['issue_description']) \
+                    +  "\n" +   f"<b>Old response :</b>" + str(row['field_response']) \
+                    +  "\n" +   f"<b>Office follow up :</b>" + str(row['follow_up_response']) \
+                    + "\n" + f"<b>Task :</b> Data quality" \
+                + "\n" +  f"<b>Project ID: </b> "+ dict_from_columns[key]
+                x= send_message(chat_id, text)
+                if x!=200:
+                    send_message(585511605, f"x from {row['Enumerator']}, projec P{dict_from_columns[key]}")
 
 
 # if __name__ == "__main__":
