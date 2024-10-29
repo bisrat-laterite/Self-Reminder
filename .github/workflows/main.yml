@@ -2,7 +2,7 @@ name: Google Sheets Telegram Automation
 
 on:
   schedule:
-    - cron: '0 16 * * *'  # Runs daily at 16:00 UTC, which is 7 PM EAT
+    - cron:  "*/50 * * * *" # reverting back to every hour
   workflow_dispatch:  # Allows manual triggering of the workflow
 
 jobs:
