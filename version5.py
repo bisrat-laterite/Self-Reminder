@@ -194,7 +194,8 @@ if __name__=="__main__":
                 
         a=read_gsheet(key, "Data Quality - Translations")
         content=pd.DataFrame(a.get_all_records())
-        filtered=content[content['chat_id']==chat_id]
+        if list(content.columns) ==[]:
+            continue
         ### send only pending/ clarification needed comments
         filtered=filtered[filtered['TASK_STATUS'].isin(["Pending", "Clarification Needed"])]
         filtered=filtered[filtered['field_response']==""]
