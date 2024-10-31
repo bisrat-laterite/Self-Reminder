@@ -197,7 +197,7 @@ if __name__=="__main__":
         if list(content.columns) ==[]:
             continue
         ### send only pending/ clarification needed comments
-        filtered=a
+        filtered=content
         filtered=filtered[filtered['TASK_STATUS'].isin(["Pending", "Clarification Needed"])]
         filtered=filtered[filtered['field_response']==""]
         for index, row in filtered.iterrows():
