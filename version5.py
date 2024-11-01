@@ -203,16 +203,17 @@ if __name__=="__main__":
         for index, row in filtered.iterrows():
             #text=(str(dict(row)))
             chat_id=row['chat_id']
-            text2 =  "<a href='https://www.laterite.com/'>Data Quality Bot</a>" \
-            + "\n" + f"<b>Enumerator Name: </b>"+ row['enum_name'] + \
-                "\n" +   f"<b>HHID: </b>" + str(row['HHID'])  + \
-                "\n" +   f"<b>Variable: </b>" + str(row['Variable']) \
-                +  "\n" +   f"<b>Translation Item :</b>" + str(row['item_to_translate']) \
-                + "\n" + f"<b>Task :</b> Translation" \
-            + "\n" +  f"<b>Project ID: </b> "+ dict_from_columns[key]                    
-            x= send_message(chat_id, text2)
-            if x!=200:
-                send_message(585511605, f"x from {row['fc_id']}, project {dict_from_columns[key]}")
+            if chat_id!="":
+                text2 =  "<a href='https://www.laterite.com/'>Data Quality Bot</a>" \
+                + "\n" + f"<b>Enumerator Name: </b>"+ row['enum_name'] + \
+                    "\n" +   f"<b>HHID: </b>" + str(row['HHID'])  + \
+                    "\n" +   f"<b>Variable: </b>" + str(row['Variable']) \
+                    +  "\n" +   f"<b>Translation Item :</b>" + str(row['item_to_translate']) \
+                    + "\n" + f"<b>Task :</b> Translation" \
+                + "\n" +  f"<b>Project ID: </b> "+ dict_from_columns[key]                    
+                x= send_message(chat_id, text2)
+                if x!=200:
+                    send_message(585511605, f"x from {row['fc_id']}, project {dict_from_columns[key]}")
                 
 
 # if __name__ == "__main__":
