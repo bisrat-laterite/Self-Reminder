@@ -163,6 +163,7 @@ if __name__=="__main__":
     print("x")
     for key in keys:
         print("y")
+        print(dict_from_columns[key])
         a=read_gsheet(key, "Data Quality - General")
         content=pd.DataFrame(a.get_all_records())
         if list(content.columns) ==[]:
